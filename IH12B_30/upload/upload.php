@@ -1,5 +1,9 @@
 <?php
 
+require_once '../model/controller.php';
+
+$name = 'niimi';
+$age = 16;
 echo '$_POST:';
 var_dump($_POST);
 echo '<br>';
@@ -14,8 +18,18 @@ if (isset($_POST['upload'])) {
     echo $_FILES['upload']['tmp_name'] . "<br/>\n";
     echo $_FILES['upload']['error'] . "<br/>\n";
     echo $_FILES['upload']['size'] . "<br/>\n";
-}
 
+    $extension = str_replace('image/', '.', $_FILES['upload']['type']);
+
+    echo '$extension:';
+    var_dump($extension);
+    echo '<br>';
+    $link = sql_connect('../../const.php');
+    $name = sql_escape($link, $name);
+    $age = sql_escape($link, $age);
+    $sql = "INSERT INTO sample2(name,age,ext)VALUES('" . $name . "'," . $age . ",'" . $extension . "')";
+    $msg = sql_query($link, $sql, 'insert');
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -31,7 +45,7 @@ if (isset($_POST['upload'])) {
         <label for="avatar">画像アップロード:</label>
         <input type="file" id="avatar" name="upload">
         <!-- accept="image/png, image/jpeg,image/png,image/gif" -->
-        <button type="submit" name="uploadfile">画像送信</button>
+        <button type="submit" name="upload">画像送信</button>
     </form>
 </body>
 
