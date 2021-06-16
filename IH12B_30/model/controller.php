@@ -74,7 +74,6 @@ function sql_query($link, $sql, $phrase)
             $msg = 'データ取得出来ませんでした';
         }
     }
-    mysqli_close($link);
     return $msg;
 }
 

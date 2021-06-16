@@ -7,3 +7,5 @@ $err = [
     'msg_age' => '',
     'msg_num' => ''
 ];
+
+// POST受け取り
