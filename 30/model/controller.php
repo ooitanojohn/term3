@@ -4,17 +4,16 @@
 // config_fileに各定数HOST_NAME,ROOT,PASS,DB_NAME,CHARACTER_CODEを記述
 function sql_connect($config_file)
 {
-
     require_once($config_file);
     $link = @mysqli_connect(
-        HOST_NAME,
+        HOST,
         ROOT,
         PASS,
         DB_NAME
     );
     // DB接続失敗
     if (!$link) {
-        // エラー 処理 開発側　
+        // エラー 処理 開発側
         error_log('[' . date('y-m-d:g-i-s') . ']' . 'sql_connect_err' . "\r\n", 3, 'log/error.log');
         // user側
         $err_code = '101';
@@ -43,7 +42,6 @@ function sql_query($link, $sql, $phrase)
     if ($phrase === 'insert') {
         $result = mysqli_query($link, $sql);
         if (!$result) {
-            mysqli_close($link);
             // 失敗時追加処理はここから
             error_log('[' . date('y-m-d:g-i-s') . ']' . 'sql_insert_err' . "\r\n", 3, 'log/error.log');
             $err_code = '102';
@@ -56,7 +54,6 @@ function sql_query($link, $sql, $phrase)
     elseif ($phrase === 'select') {
         $result = mysqli_query($link, $sql);
         if (!$result) {
-            mysqli_close($link);
             // 失敗時追加処理はここから
             error_log('[' . date('y-m-d:g-i-s') . ']' . 'sql_select_err' . "\r\n", 3, 'log/error.log');
             $err_code = '103';
@@ -70,8 +67,6 @@ function sql_query($link, $sql, $phrase)
         // 成功時追加処理はここから
         return $result;
     }
-    mysqli_close($link);
-    // return
 }
 
 // move_uploaded_file

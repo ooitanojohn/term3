@@ -1,6 +1,6 @@
 <?php
 
-const HOST_NAME = 'localhost';
+const HOST = 'localhost';
 const ROOT = 'root';
 const PASS = '';
 const DB_NAME = 'ph23_sample';
