@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+// 更新時 noticeエラー回避
 if (!isset($_SESSION['id'])) {
     header('Location:index.php');
     exit;

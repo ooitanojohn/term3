@@ -18,11 +18,11 @@
         </tr>
         <tr class="col-auto mb-2">
             <th>氏名</th>
-            <td><?php echo escape($name) ?></td>
+            <td><?php echo escape($name) . '様' ?></td>
         </tr>
         <tr class="col-auto mb-2">
             <th>年齢</th>
-            <td><?php echo $age ?></td>
+            <td><?php echo $age . '歳' ?></td>
         </tr>
         <tr class="col-auto mb-2">
             <th>画像</th>
@@ -38,8 +38,8 @@
         </tr>
         <?php foreach ($result as $key => $value) { ?>
             <tr>
-                <td scope="row"><?php echo escape($value[1]) ?></td>
-                <td><img src="img/<?php echo $value[0] . $value[3] ?>" alt="<?php echo 'No.' . $value[0] . '登録写真' ?>" width="100" height="auto"></td>
+                <td scope="row"><a href="detail.php?id=<?php echo $value[0] ?>"><?php echo escape($value[1]) . '様' ?></a></td>
+                <td><img src=" img/<?php echo $value[0] . $value[3] ?>" alt="<?php echo 'No.' . $value[0] . '登録写真' ?>" width="100" height="auto"></td>
             </tr>
         <?php } ?>
     </table>
