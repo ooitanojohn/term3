@@ -23,6 +23,10 @@ if (isset($_POST['upload'])) {
     $ext = str_replace('image/', '.', $_FILES['upload']['type']);
     // 拡張子チェック
     if ($ext === '.jpg' || $ext === '.jpeg' || $ext === '.png' || $ext === '.gif') {
+    } else {
+        $err[3] = '拡張子はjpg,jpeg,png,gifに設定してください。';
+    }
+    if ($err === ['', '', '', '']) { // 条件式いいの見つからない~~
         $link = sql_connect('../const.php');
         $name = sql_escape($link, $name);
         $age = sql_escape($link, $age);
@@ -33,10 +37,6 @@ if (isset($_POST['upload'])) {
         $id = sql_query($link, $sql, 'select');
         $id = $id[0][0];
         mysqli_close($link);
-    } else {
-        $err[3] = '拡張子はjpg,jpeg,png,gifに設定してください。';
-    }
-    if ($err === ['', '', '', '']) { // 条件式いいの見つからない~~
         // img保存
         if (move_uploaded_file($_FILES['upload']['tmp_name'], trim("img/" . $id . "$ext"))) {
             $_SESSION['name'] = $name;
